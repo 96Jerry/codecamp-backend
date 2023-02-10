@@ -1,4 +1,4 @@
-function getWelcomeTemplate({ name, age, school, createdAt }) {
+function getWelcomeTemplate({ name }) {
   const result = `
     <html>
         <body>
@@ -21,4 +21,4 @@ const age = 12;
 const school = "토끼초등학교";
 const createdAt = "2020-01-02";
 
-getWelcomeTemplate({ name, school, createdAt });
+getWelcomeTemplate({ name, age, school, createdAt });
