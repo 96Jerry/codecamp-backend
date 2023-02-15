@@ -62,5 +62,5 @@ app.post("/tokens/phone", (req, res) => {
 
 //api 서버 실행
 app.listen(3001, () => {
-  console.log(`Example app listening on port ${3000}`);
+  console.log(`Example app listening on port ${3001}`);
 });
