@@ -11,7 +11,6 @@ async function createBoardAPI(mydata) {
   const result = await axios.get(myurl);
   // 3. 스크래핑 결과에서 OG(오픈그래프) 코드 골라내서 변수에 저장하기
   const $ = cheerio.load(result.data);
-  console.log("11");
 
   $("meta").each((index, el) => {
     if ($(el).attr("property")) {
