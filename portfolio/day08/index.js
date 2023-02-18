@@ -44,6 +44,24 @@ app.post("/tokens/phone", async (req, res) => {
   }
 });
 
+app.patch("/tokens/phone", async (req, res) => {
+  const phone = req.body.phone;
+  const number = req.body.number;
+  const isThere = await Token.findOne({ phone: phone });
+  // // 1. 핸드폰 번호가 저장되어 있지 않다면 false
+  if (isThere === null) {
+    res.send(false);
+  }
+  // 2. 핸드폰 번호가 저장되어 있지만 인증번호가 일치하지 않는다면 false
+  else if (isThere) {
+    if (isThere.token !== number) res.send(false);
+    else if (isThere.token === number) {
+      res.send(true);
+    }
+  }
+  // 3. 핸드폰 번호와 인증번호가 일치하면 true
+});
+
 mongoose.connect(process.env.MONGOOSE_URL, () => {
   console.log("mongodb 접속완료");
 });
