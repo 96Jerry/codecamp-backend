@@ -53,9 +53,10 @@ app.patch("/tokens/phone", async (req, res) => {
     res.send(false);
   }
   // 2. 핸드폰 번호가 저장되어 있지만 인증번호가 일치하지 않는다면 false
-  else if (isThere) {
+  if (isThere) {
     if (isThere.token !== number) res.send(false);
     else if (isThere.token === number) {
+      await Token.updateOne({ phone: phone }, { $set: { isAuth: true } });
       res.send(true);
     }
   }
