@@ -35,6 +35,9 @@ app.post("/tokens/phone", async (req, res) => {
   }
   // 3.0. 핸드폰 번호 유효성 검사
   const isValid = checkValidationPhone(phone);
+  console.log(
+    "=============================================================================="
+  );
   if (isValid) {
     // 3. 핸드폰으로 인증번호 전송
     sendSMS(phone, number);
@@ -62,6 +65,8 @@ app.patch("/tokens/phone", async (req, res) => {
   }
   // 3. 핸드폰 번호와 인증번호가 일치하면 true
 });
+
+// commit 할때 git convention 활용. (ex. fix : 고침)
 
 mongoose.connect(process.env.MONGOOSE_URL, () => {
   console.log("mongodb 접속완료");
