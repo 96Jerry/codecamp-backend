@@ -1,0 +1,13 @@
+{
+  "name": "12-04-typescript-decorator",
+  "packageManager": "yarn@3.4.1",
+  "scripts": {
+    "dev": "ts-node index.ts"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
