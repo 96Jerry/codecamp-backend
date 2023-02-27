@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class createStarbucksService {
+export class CreateStarbucksService {
   aaa() {
     return 'Hello';
   }

@@ -1,14 +1,14 @@
 import { Query, Resolver } from '@nestjs/graphql';
-import { createStarbucksService } from './createStarbucks.service';
+import { CreateStarbucksService } from './createStarbucks.service';
 
 @Resolver()
-export class createStarbucksResolver {
+export class CreateStarbucksResolver {
   constructor(
-    private readonly createStarbucksService: createStarbucksService,
+    private readonly createStarbucksService: CreateStarbucksService,
   ) {}
 
-  @Query()
+  @Query(() => String)
   getHello() {
-    return this.createStarbucksService.aaa;
+    return this.createStarbucksService.aaa();
   }
 }
