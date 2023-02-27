@@ -3,18 +3,18 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CreateStarbucksModule } from './createStarbucks/createStarbucks.module';
-import { CreateStarbucks } from './createStarbucks/entities/createStarbucks.entity';
+import { Starbucks } from './createStarbucks/entities/createStarbucks.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: '127.0.0.1',
       port: 3306,
       username: 'root',
       password: 'dlawns170633!',
-      database: 'myproject03',
-      entities: [CreateStarbucks],
+      database: 'myproject04',
+      entities: [Starbucks],
       synchronize: true,
       logging: true,
     }),
