@@ -21,14 +21,6 @@ export class CreateStarbucksResolver {
 
   @Mutation(() => String)
   createStarbucks(
-    @Args('menu') menu: string,
-    @Args('price') price: number,
-    @Args('kcal') kcal: number,
-    @Args('saturated_fat') saturated_fat: number,
-    @Args('protein') protein: number,
-    @Args('salt') salt: number,
-    @Args('sugar') sugar: number,
-    @Args('caffeine') caffeine: number,
     @Args('createStarbucksInput') createStarbucksInput: CreateStarbucksInput,
   ) {
     console.log(createStarbucksInput);

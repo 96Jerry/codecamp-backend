@@ -19,7 +19,7 @@ type Query {
 }
 
 type Mutation {
-  createStarbucks(menu: String!, price: Float!, kcal: Float!, saturated_fat: Float!, protein: Float!, salt: Float!, sugar: Float!, caffeine: Float!, createStarbucksInput: CreateStarbucksInput!): String!
+  createStarbucks(createStarbucksInput: CreateStarbucksInput!): String!
 }
 
 input CreateStarbucksInput {
