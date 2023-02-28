@@ -8,7 +8,19 @@ export class CreateStarbucksService {
   findAll() {
     const result = [
       {
+        id: 1,
         menu: '아메리카노',
+        price: 100,
+        kcal: 10,
+        saturated_fat: 10,
+        protein: 10,
+        salt: 10,
+        sugar: 10,
+        caffeine: 10,
+      },
+      {
+        id: 2,
+        menu: '홍차',
         price: 100,
         kcal: 10,
         saturated_fat: 10,

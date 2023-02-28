@@ -4,6 +4,10 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 @ObjectType()
 export class Starbucks {
+  @PrimaryGeneratedColumn('increment')
+  @Field(() => Int)
+  id: number;
+
   @Column()
   @Field(() => String)
   menu: string;

@@ -31,6 +31,8 @@ export class CreateStarbucksResolver {
     @Args('caffeine') caffeine: number,
     @Args('createStarbucksInput') createStarbucksInput: CreateStarbucksInput,
   ) {
+    console.log(createStarbucksInput);
+
     return this.createStarbucksService.create();
   }
 }
