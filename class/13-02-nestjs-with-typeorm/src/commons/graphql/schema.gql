@@ -22,3 +22,5 @@ input CreateBoardInput {
   title: String!
   contents: String!
 }
+
+// git clone 배우기 및 다른곳에서도 할 수 있게 하기
