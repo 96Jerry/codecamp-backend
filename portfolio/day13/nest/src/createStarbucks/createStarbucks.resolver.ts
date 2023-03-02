@@ -15,7 +15,7 @@ export class CreateStarbucksResolver {
   // }
 
   @Query(() => [Starbucks])
-  fetchCreateStarbucks() {
+  fetchStarbucks() {
     return this.createStarbucksService.findAll();
   }
 

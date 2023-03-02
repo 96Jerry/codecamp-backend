@@ -15,7 +15,7 @@ type Starbucks {
 }
 
 type Query {
-  fetchCreateStarbucks: [Starbucks!]!
+  fetchStarbucks: [Starbucks!]!
 }
 
 type Mutation {
