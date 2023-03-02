@@ -10,9 +10,12 @@ export class ProductCategoryService {
     private readonly productCategoryRepository: Repository<ProductCategory>,
   ) {}
   //카테고리를 DB에 저장
-  create({ name }) {
-    this.productCategoryRepository.save({
+  async create({ name }) {
+    const result = await this.productCategoryRepository.save({
       name,
     });
+    console.log(result);
+
+    return result;
   }
 }

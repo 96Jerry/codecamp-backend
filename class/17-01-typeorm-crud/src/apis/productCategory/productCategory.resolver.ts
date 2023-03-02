@@ -9,6 +9,6 @@ export class ProductCategoryResolver {
   ) {}
   @Mutation(() => ProductCategory)
   createProductCategory(@Args('name') name: string) {
-    this.productCategoryService.create({ name });
+    return this.productCategoryService.create({ name });
   }
 }
