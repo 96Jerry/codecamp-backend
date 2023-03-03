@@ -20,14 +20,14 @@ export class ProductService {
 
   async findAll() {
     return await this.productRepository.find({
-      relations: ['productSaleslocation'],
+      relations: ['productSaleslocation', 'productCategory'],
     });
   }
 
   async findOne({ productId }) {
     return await this.productRepository.findOne({
       where: { id: productId },
-      relations: ['productSaleslocation'],
+      relations: ['productSaleslocation', 'productCategory'],
     });
   }
 
@@ -43,13 +43,17 @@ export class ProductService {
     //   // price: createProductInput.price,
     // });
     // 2. 상품과 상품거래위치를 같이 등록하는 경우
-    const { productSaleslocation, ...product } = createProductInput;
+    const { productSaleslocation, productCategoryId, ...product } =
+      createProductInput;
     const result = await this.productSaleslocationRepository.save({
       ...productSaleslocation,
     });
     const result2 = await this.productRepository.save({
       ...product,
-      productSaleslocation: result,
+      productSaleslocation: result, // result 통째로 넣기 vs id만 넣기
+      productCategory: {
+        id: productCategoryId,
+      },
     });
     return result2;
   }
