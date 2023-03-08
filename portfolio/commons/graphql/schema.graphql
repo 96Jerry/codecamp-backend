@@ -1,0 +1,43 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ProductDetail {
+  id: String!
+  description: String!
+  kcal: Int!
+}
+
+type ProductMainCategory {
+  id: String!
+  name: String!
+}
+
+type ProductSubCategory {
+  id: String!
+  name: String!
+  productMainCategory: ProductMainCategory!
+}
+
+type Product {
+  id: String!
+  name: String!
+  productSubCategory: ProductSubCategory!
+  productDetail: ProductDetail!
+  allergies: [Allergy!]!
+}
+
+type Allergy {
+  id: String!
+  name: String!
+  products: [Product!]!
+}
+
+type Query {
+  fetchProducts: [Product!]!
+  fetchProduct(productId: String!): Product!
+}
+
+type Mutation {
+  createProductSubCategory(name: String!): ProductSubCategory!
+}

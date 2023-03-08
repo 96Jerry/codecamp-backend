@@ -1,15 +1,26 @@
+import { Field, ObjectType } from '@nestjs/graphql';
 import { Product } from 'src/apis/products/entities/product.entity';
-import { Column, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
+@ObjectType()
 export class Allergy {
   @PrimaryGeneratedColumn('uuid')
-  allergyId: string;
+  @Field(() => String)
+  id: string;
 
   @Column()
+  @Field(() => String)
   name: string;
 
-  @JoinColumn()
-  @ManyToMany(() => Product[], (products) => products.allergies)
-  products: Product[]
+  @JoinTable()
+  @ManyToMany(() => Product, (products) => products.allergies)
+  @Field(() => [Product])
+  products: Product[];
 }
