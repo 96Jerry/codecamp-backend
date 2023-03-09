@@ -12,4 +12,10 @@ export class CreateProductInput {
 
   @Field(() => String)
   productSubCategoryId: string;
+
+  @Field(() => String)
+  productMainCategoryId: string;
+
+  @Field(() => [String])
+  allergies: string[];
 }

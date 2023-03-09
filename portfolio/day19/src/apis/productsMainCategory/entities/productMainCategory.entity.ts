@@ -8,7 +8,7 @@ export class ProductMainCategory {
   @Field(() => String)
   id: string;
 
-  @Column()
-  @Field(() => String)
+  @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
   name: string;
 }

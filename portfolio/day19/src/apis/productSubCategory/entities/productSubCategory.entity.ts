@@ -1,6 +1,12 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ProductMainCategory } from 'src/apis/productsMainCategory/entities/productMainCategory.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 @ObjectType()
@@ -14,6 +20,7 @@ export class ProductSubCategory {
   name: string;
 
   @ManyToOne(() => ProductMainCategory)
+  @JoinColumn()
   @Field(() => ProductMainCategory)
   productMainCategory: ProductMainCategory;
 }

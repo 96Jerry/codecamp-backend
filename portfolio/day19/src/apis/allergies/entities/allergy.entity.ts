@@ -19,7 +19,6 @@ export class Allergy {
   @Field(() => String)
   name: string;
 
-  @JoinTable()
   @ManyToMany(() => Product, (products) => products.allergies)
   @Field(() => [Product])
   products: Product[];

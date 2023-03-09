@@ -10,7 +10,7 @@ type ProductDetail {
 
 type ProductMainCategory {
   id: String!
-  name: String!
+  name: String
 }
 
 type ProductSubCategory {
@@ -57,6 +57,8 @@ input CreateProductInput {
   name: String!
   productDetail: ProductDetailInput!
   productSubCategoryId: String!
+  productMainCategoryId: String!
+  allergies: [String!]!
 }
 
 input ProductDetailInput {
@@ -68,4 +70,6 @@ input UpdateProductInput {
   name: String
   productDetail: ProductDetailInput
   productSubCategoryId: String
+  productMainCategoryId: String
+  allergies: [String!]
 }
