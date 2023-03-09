@@ -5,6 +5,7 @@ import { ProductSubCategoryModule } from './apis/productSubCategory/productSubCa
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ProductMainCategoryModule } from './apis/productsMainCategory/productMainCategory.module';
+import { UserModule } from './apis/users/user.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ProductMainCategoryModule } from './apis/productsMainCategory/productMa
     ProductModule,
     ProductSubCategoryModule,
     ProductMainCategoryModule,
+    UserModule,
   ],
 })
 export class AppModule {}

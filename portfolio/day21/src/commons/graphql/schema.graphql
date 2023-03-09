@@ -33,10 +33,19 @@ type Allergy {
   products: [Product!]!
 }
 
+type User {
+  id: String!
+  email: String!
+  name: String!
+  age: Int!
+}
+
 type Query {
   fetchProducts: [Product!]!
   fetchProduct(productId: String!): Product!
   fetchProductsWithDeleted: [Product!]!
+  fetchUsers: [User!]!
+  fetchUser(productId: String!): User!
 }
 
 type Mutation {
@@ -46,6 +55,9 @@ type Mutation {
   restoreProduct(productId: String!): Boolean!
   createProductSubCategory(name: String!): ProductSubCategory!
   createProductMainCategory(name: String!): ProductMainCategory!
+  createUser(createUserInput: CreateUserInput!): User!
+  deleteUser(userId: String!): Boolean!
+  updateUser(updateUserInput: UpdateUserInput!, userId: String!): User!
 }
 
 input CreateProductInput {
@@ -67,4 +79,18 @@ input UpdateProductInput {
   productSubCategoryId: String
   productMainCategoryId: String
   allergies: [String!]
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  name: String!
+  age: Int!
+}
+
+input UpdateUserInput {
+  email: String
+  password: String
+  name: String
+  age: Int
 }
