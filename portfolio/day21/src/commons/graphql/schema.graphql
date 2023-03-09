@@ -1,0 +1,70 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ProductDetail {
+  id: String!
+  description: String!
+  kcal: Int!
+}
+
+type ProductMainCategory {
+  id: String!
+  name: String
+}
+
+type ProductSubCategory {
+  id: String!
+  name: String!
+  productMainCategory: ProductMainCategory!
+}
+
+type Product {
+  id: String!
+  name: String!
+  productSubCategory: ProductSubCategory!
+  productDetail: ProductDetail!
+  allergies: [Allergy!]!
+}
+
+type Allergy {
+  id: String!
+  name: String!
+  products: [Product!]!
+}
+
+type Query {
+  fetchProducts: [Product!]!
+  fetchProduct(productId: String!): Product!
+  fetchProductsWithDeleted: [Product!]!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(productId: String!): Boolean!
+  restoreProduct(productId: String!): Boolean!
+  createProductSubCategory(name: String!): ProductSubCategory!
+  createProductMainCategory(name: String!): ProductMainCategory!
+}
+
+input CreateProductInput {
+  name: String!
+  productDetail: ProductDetailInput!
+  productSubCategoryId: String!
+  productMainCategoryId: String!
+  allergies: [String!]!
+}
+
+input ProductDetailInput {
+  description: String!
+  kcal: Int!
+}
+
+input UpdateProductInput {
+  name: String
+  productDetail: ProductDetailInput
+  productSubCategoryId: String
+  productMainCategoryId: String
+  allergies: [String!]
+}
