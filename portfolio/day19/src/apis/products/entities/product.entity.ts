@@ -24,6 +24,14 @@ export class Product {
   @Field(() => String)
   name: string;
 
+  @Column({ default: false })
+  @Field(() => Boolean)
+  isDeleted: boolean;
+
+  @Column({ default: null })
+  @Field(() => Date)
+  deletedAt: Date;
+
   @ManyToOne(() => ProductSubCategory)
   @Field(() => ProductSubCategory)
   productSubCategory: ProductSubCategory;

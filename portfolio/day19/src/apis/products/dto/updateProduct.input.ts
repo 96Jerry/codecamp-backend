@@ -3,6 +3,5 @@ import { ProductDetailInput } from 'src/apis/productDetails/dto/productDetail.in
 import { Column, Entity } from 'typeorm';
 import { CreateProductInput } from './createProduct.input';
 
-@Entity()
 @InputType()
 export class UpdateProductInput extends PartialType(CreateProductInput) {}
