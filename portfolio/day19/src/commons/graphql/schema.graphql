@@ -22,17 +22,10 @@ type ProductSubCategory {
 type Product {
   id: String!
   name: String!
-  isDeleted: Boolean!
-  deletedAt: DateTime!
   productSubCategory: ProductSubCategory!
   productDetail: ProductDetail!
   allergies: [Allergy!]!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type Allergy {
   id: String!
@@ -43,12 +36,14 @@ type Allergy {
 type Query {
   fetchProducts: [Product!]!
   fetchProduct(productId: String!): Product!
+  fetchProductsWithDeleted: [Product!]!
 }
 
 type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
   deleteProduct(productId: String!): Boolean!
+  restoreProduct(productId: String!): Boolean!
   createProductSubCategory(name: String!): ProductSubCategory!
   createProductMainCategory(name: String!): ProductMainCategory!
 }

@@ -4,6 +4,7 @@ import { ProductDetail } from 'src/apis/productDetails/entities/productDetail.en
 import { ProductSubCategory } from 'src/apis/productSubCategory/entities/productSubCategory.entity';
 import {
   Column,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   JoinTable,
@@ -24,12 +25,8 @@ export class Product {
   @Field(() => String)
   name: string;
 
-  @Column({ default: false })
-  @Field(() => Boolean)
-  isDeleted: boolean;
-
-  @Column({ default: null })
-  @Field(() => Date)
+  @DeleteDateColumn() // soft delete 를 하기 위해서 필요한 데코레이터이다.
+  // @Field(() => Date) // 삭제된 데이터를 불러올 필요가 없으니 field는 필요없다.
   deletedAt: Date;
 
   @ManyToOne(() => ProductSubCategory)

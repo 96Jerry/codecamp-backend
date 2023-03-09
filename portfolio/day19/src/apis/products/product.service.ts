@@ -23,23 +23,13 @@ export class ProductService {
   ) {}
   async findAll() {
     return await this.productRepository.find({
-      relations: [
-        'productSubCategory',
-        'allergies',
-        'productDetail',
-        'productMainCategory',
-      ], // 어떤걸 join 해서 가져올지 정해주는 것
+      relations: ['productSubCategory', 'allergies', 'productDetail'], // 어떤걸 join 해서 가져올지 정해주는 것
     });
   }
   async findOne({ productId }) {
     return await this.productRepository.findOne({
       where: { id: productId },
-      relations: [
-        'productSubCategory',
-        'allergies',
-        'productDetail',
-        'productMainCategory',
-      ],
+      relations: ['productSubCategory', 'allergies', 'productDetail'], // productMainCategory는 product entity에 없기때문에 조회하지 않는다.
     });
   }
 
@@ -109,6 +99,15 @@ export class ProductService {
     // // 3. soft 삭제(typeorm 제공)
     // this.productRepository.softRemove({id: productId}) // id로만
     const result = await this.productRepository.softDelete({ id: productId });
+    return result.affected ? true : false;
+  }
+
+  async findAllWithDeleted() {
+    return await this.productRepository.find({ withDeleted: true });
+  }
+
+  async restore({ productId }) {
+    const result = await this.productRepository.restore({ id: productId });
     return result.affected ? true : false;
   }
 }

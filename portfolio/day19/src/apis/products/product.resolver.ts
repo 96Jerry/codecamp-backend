@@ -40,6 +40,20 @@ export class ProductResolver {
   deleteProduct(
     @Args('productId') productId: string, //
   ) {
-    this.productService.delete({ productId });
+    return this.productService.delete({ productId });
+  }
+
+  // 삭제한 상품도 조회하는 API
+  @Query(() => [Product])
+  fetchProductsWithDeleted() {
+    return this.productService.findAllWithDeleted();
+  }
+
+  // 삭제한 상품을 다시 보이게 만드는 API
+  @Mutation(() => Boolean)
+  restoreProduct(
+    @Args('productId') productId: string, //
+  ) {
+    return this.productService.restore({ productId });
   }
 }
