@@ -41,4 +41,11 @@ export class AuthController {
       'http://127.0.0.1:5500/main-project/frontend/login/index.html',
     );
   }
+
+@Get('/login/naver')
+@UseGuards(AuthGuard('naver'))
+async loginNaver(){
+  res.redirect(
+    'http://127.0.0.1:5500/main-project/frontend/login/index.html',
+}
 }
