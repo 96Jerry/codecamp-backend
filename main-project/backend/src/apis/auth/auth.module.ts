@@ -3,7 +3,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtAccessStrategy } from 'src/commons/auth/jwt-access.strategy';
 import { JwtRefreshStrategy } from 'src/commons/auth/jwt-refresh.strategy';
+import { JwtFacebookStrategy } from 'src/commons/auth/jwt-social-facebook.strategy';
 import { JwtGoogleStrategy } from 'src/commons/auth/jwt-social-google.strategy';
+import { JwtKakaoStrategy } from 'src/commons/auth/jwt-social-kakao.strategy';
+import { JwtNaverStrategy } from 'src/commons/auth/jwt-social-naver.strategy';
 import { User } from '../users/entities/user.entity';
 import { UserService } from '../users/user.service';
 import { AuthController } from './auth.controller';
@@ -22,6 +25,9 @@ import { AuthService } from './auth.service';
     JwtAccessStrategy,
     JwtRefreshStrategy,
     JwtGoogleStrategy,
+    JwtNaverStrategy,
+    JwtKakaoStrategy,
+    JwtFacebookStrategy,
   ],
   controllers: [AuthController],
 })

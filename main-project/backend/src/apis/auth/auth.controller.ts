@@ -42,10 +42,84 @@ export class AuthController {
     );
   }
 
-@Get('/login/naver')
-@UseGuards(AuthGuard('naver'))
-async loginNaver(){
-  res.redirect(
-    'http://127.0.0.1:5500/main-project/frontend/login/index.html',
-}
+  @Get('/login/naver')
+  @UseGuards(AuthGuard('naver'))
+  async loginNaver(
+    @Req() req: Request & IOAuthUser, //
+    @Res() res: Response,
+  ) {
+    let user = await this.userService.findOneWithEmail({
+      email: req.user.email,
+    });
+    // console.log(req.user.email);
+    // console.log(req.user.password);
+    // console.log(req.user.name);
+    // console.log(req.user.age);
+    if (!user) {
+      user = await this.userService.create({
+        email: req.user.email,
+        password: req.user.password,
+        name: req.user.name,
+        age: req.user.age,
+      });
+    }
+    this.authService.setRefreshToken({ user, res });
+    res.redirect(
+      'http://127.0.0.1:5500/main-project/frontend/login/index.html',
+    );
+  }
+
+  @Get('/login/kakao')
+  @UseGuards(AuthGuard('kakao'))
+  async loginKakao(
+    @Req() req: Request & IOAuthUser, //
+    @Res() res: Response,
+  ) {
+    let user = await this.userService.findOneWithEmail({
+      email: req.user.email,
+    });
+    // console.log(req.user.email);
+    // console.log(req.user.password);
+    // console.log(req.user.name);
+    // console.log(req.user.age);
+    if (!user) {
+      user = await this.userService.create({
+        email: req.user.email,
+        password: req.user.password,
+        name: req.user.name,
+        age: req.user.age,
+      });
+    }
+    this.authService.setRefreshToken({ user, res });
+    res.redirect(
+      'http://127.0.0.1:5500/main-project/frontend/login/index.html',
+    );
+  }
+
+  // @Get('/login/facebook')
+  // @UseGuards(AuthGuard('facebook'))
+  // async loginFacebook(
+  //   @Req() req: Request & IOAuthUser, //
+  //   @Res() res: Response,
+  // ) {
+  //   // let user = await this.userService.findOneWithEmail({
+  //   //   email: req.user.email,
+  //   // });
+  //   // // console.log(req.user.email);
+  //   // // console.log(req.user.password);
+  //   // // console.log(req.user.name);
+  //   // // console.log(req.user.age);
+  //   // if (!user) {
+  //   //   user = await this.userService.create({
+  //   //     email: req.user.email,
+  //   //     password: req.user.password,
+  //   //     name: req.user.name,
+  //   //     age: req.user.age,
+  //   //   });
+  //   // }
+  //   // this.authService.setRefreshToken({ user, res });
+  //   // res.redirect(
+  //   //   'http://127.0.0.1:5500/main-project/frontend/login/index.html',
+  //   // );
+  // }
 }
