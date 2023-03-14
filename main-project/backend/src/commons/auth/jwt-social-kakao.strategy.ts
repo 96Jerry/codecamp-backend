@@ -1,10 +1,11 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-kakao';
+import 'dotenv/config';
 
 export class JwtKakaoStrategy extends PassportStrategy(Strategy, 'kakao') {
   constructor() {
     super({
-      clientID: '53a4c8b6444eaa8886141b7367604beb',
+      clientID: process.env.KAKAO_CLIENT_ID,
       callbackURL: 'http://localhost:3000/login/kakao',
     });
   }
