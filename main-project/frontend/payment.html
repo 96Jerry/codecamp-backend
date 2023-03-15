@@ -38,23 +38,67 @@
             // callback
             if (rsp.success) {
               // 결제 성공시
-              console.log(rsp);
+              // const { merchant_uid, imp_uid } = rsp;
+
+              // // access token 발급받기
+              // const getToken = await axios({
+              //   url: "https://api.iamport.kr/users/getToken",
+              //   method: "post", // POST method
+              //   headers: { "Content-Type": "application/json" },
+              //   data: {
+              //     imp_key: "0538116408882551", // REST API 키
+              //     imp_secret:
+              //       "asTySKlhMcigpNQ3gfPQ19xoGjEbPRENZXH0mp63eri7mCwg43HbpZ9dy0MkzAd290Qmuo17dBsQlrhv", // REST API Secret
+              //   },
+              // });
+
+              // console.log(getToken);
+              // const { access_token } = getToken.data; // 인증 토큰
+
+              // // imp_uid로 포트원 서버에서 결제 정보 조회
+              // const getPaymentData = await axios({
+              //   // imp_uid 전달
+              //   url: `https://api.iamport.kr/payments/${imp_uid}`,
+              //   // GET method
+              //   method: "get",
+              //   // 인증 토큰 Authorization header에 추가
+              //   headers: { Authorization: access_token },
+              // });
+
+              // const paymentData = getPaymentData.data; // 조회한 결제 정보
+              // console.log(paymentData);
+
+              // // DB에서 결제되어야 하는 금액 조회
+              // const order = await Orders.findById(paymentData.merchant_uid);
+              // const amountToBePaid = order.amount; // 결제 되어야 하는 금액
+
+              // // 결제 검증하기
+              // const { amount, status } = paymentData;
+              // // 결제금액 일치. 결제 된 금액 === 결제 되어야 하는 금액
+              // if (amount === amountToBePaid) {
+              //   await Orders.findByIdAndUpdate(merchant_uid, {
+              //     $set: paymentData,
+              //   }); // DB에 결제 정보 저장
+              // } else {
+              //   // 결제금액 불일치. 위/변조 된 결제
+              //   throw { status: "forgery", message: "위조된 결제시도" };
+              // }
 
               const data = await axios.post(
                 "http://localhost:3000/graphql",
                 {
                   query: `
-                      mutation {
-                        createPayment(impUid: "${rsp.imp_uid}", amount: ${rsp.paid_amount}) {
-                          id
-                        }
-                      }
-                    `,
+                            mutation {
+                              createPayment(impUid: "${rsp.imp_uid}", amount: ${rsp.paid_amount}) {
+                                id
+                              }
+                            }
+                          `,
                 },
                 {
                   headers: {
                     Authorization:
-                      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jb20iLCJzdWIiOiJkYmE1MDVlMi05MDBhLTRhNWEtOGE1ZC1jNTZlYTQ3ZmU5MjIiLCJpYXQiOjE2Nzg4NzU4NDQsImV4cCI6MTY3ODg3OTQ0NH0.MfDbBjvVgR6qq5bL6JrM11uGluvgy5Z7hrlulClSXXk",
+                      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jb20iLCJzdWIiOiJkYmE1MDVlMi05MDBhLTRhNWEtOGE1ZC1jNTZlYTQ3ZmU5MjIiLCJpYXQiOjE2Nzg4ODM3MzgsImV4cCI6MTY3ODg4NzMzOH0.65kIC5U94VakkXmgsJ5uUWaHUmAvk4pLwHj28CzWBDE",
                   },
                 }
               );

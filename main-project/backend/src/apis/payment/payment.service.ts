@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../users/entities/user.entity';
@@ -31,5 +31,12 @@ export class PaymentServices {
     });
 
     return payment;
+  }
+
+  checkDuplicate({ impUid }) {
+    const result = this.paymentRepository.findOneBy({ impUid });
+    if (result) {
+      throw new ConflictException('이미 결제된 아이디입니다.');
+    }
   }
 }
