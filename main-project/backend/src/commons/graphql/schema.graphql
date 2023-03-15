@@ -38,6 +38,20 @@ type User {
   email: String!
   name: String!
   age: Int!
+  point: Int!
+}
+
+type Payment {
+  id: String!
+  impUid: String!
+  amount: Int!
+  status: PAYMENT_STATUS_ENUM!
+  user: User!
+}
+
+enum PAYMENT_STATUS_ENUM {
+  PAYMENT
+  CANCEL
 }
 
 type Query {
@@ -53,6 +67,7 @@ type Mutation {
   updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
   deleteProduct(productId: String!): Boolean!
   restoreProduct(productId: String!): Boolean!
+  createPayment(impUid: String!, amount: Float!): Payment!
   createProductSubCategory(name: String!): ProductSubCategory!
   createProductMainCategory(name: String!): ProductMainCategory!
   createUser(createUserInput: CreateUserInput!): User!

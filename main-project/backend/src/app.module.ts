@@ -7,6 +7,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ProductMainCategoryModule } from './apis/productsMainCategory/productMainCategory.module';
 import { UserModule } from './apis/users/user.module';
 import { AuthModule } from './apis/auth/auth.module';
+import { PaymentModule } from './apis/payment/payment.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AuthModule } from './apis/auth/auth.module';
       synchronize: true,
     }),
     ProductModule,
+    PaymentModule,
     ProductSubCategoryModule,
     ProductMainCategoryModule,
     UserModule,

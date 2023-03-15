@@ -31,4 +31,8 @@ export class User {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @Column({ default: 0 })
+  @Field(() => Int)
+  point: number;
 }

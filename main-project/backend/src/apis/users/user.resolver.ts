@@ -6,7 +6,7 @@ import { UserService } from './user.service';
 import * as bycrpt from 'bcrypt';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthAccessGuard } from 'src/commons/auth/gql-auth.guard';
-import { CurrentUser } from 'src/commons/auth/gql-user.param';
+import { CurrentUser, ICurrentUser } from 'src/commons/auth/gql-user.param';
 
 @Resolver()
 export class UserResolver {
@@ -55,7 +55,7 @@ export class UserResolver {
   @UseGuards(GqlAuthAccessGuard)
   @Mutation(() => Boolean)
   updateUserPwd(
-    @CurrentUser() currentUser: any,
+    @CurrentUser() currentUser: ICurrentUser,
     @Args('changePwd') changePwd: string,
   ) {
     const userId = currentUser.id;
