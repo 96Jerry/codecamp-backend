@@ -41,13 +41,4 @@ export class AuthController {
   ) {
     this.authService.loginSocial({ req, res });
   }
-
-  // @Get('/login/facebook')
-  // @UseGuards(AuthGuard('facebook'))
-  // async loginFacebook(
-  //   @Req() req: Request & IOAuthUser, //
-  //   @Res() res: Response,
-  // ) {
-  // this.authService.loginSocial
-  // }
 }
