@@ -1,0 +1,17 @@
+show variables
+;
+
+set global max_connections =15
+;
+
+show status
+;
+
+show processlist
+;
+
+set global max_connections = 151
+;
+
+kill 98
+;
