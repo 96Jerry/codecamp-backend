@@ -29,16 +29,28 @@ export class IamportService {
       );
       if (result.data.response.status !== 'paid') {
         throw new ConflictException('결제 내역이 존재하지 않습니다.');
-      } else {
-        if (result.data.response.amount !== amount)
-          throw new UnprocessableEntityException('결제 금액이 잘못되었습니다.');
       }
+      if (result.data.response.amount !== amount)
+        throw new UnprocessableEntityException('결제 금액이 잘못되었습니다.');
     } catch (e) {
       if (e?.response?.data?.message) {
         throw new HttpException(e.response.data.message, e.response.status);
       } else {
         throw e;
       }
+    }
+  }
+
+  async cancel({ impUid, token }) {
+    try {
+      const result = await axios.post(
+        'https://api.iamport.kr/payments/cancel',
+        { imp_uid: impUid },
+        { headers: { Authorization: token } },
+      );
+      return result.data.response.cancel_amount;
+    } catch (e) {
+      throw new HttpException(e.response.data.message, e.response.status);
     }
   }
 }

@@ -25,6 +25,7 @@ import { PaymentModule } from './apis/payment/payment.module';
       database: 'myproject04',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
+      logging: true,
     }),
     ProductModule,
     PaymentModule,

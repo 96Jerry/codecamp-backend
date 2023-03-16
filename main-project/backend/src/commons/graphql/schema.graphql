@@ -68,6 +68,7 @@ type Mutation {
   deleteProduct(productId: String!): Boolean!
   restoreProduct(productId: String!): Boolean!
   createPayment(impUid: String!, amount: Float!): Payment!
+  cancelPayment(impUid: String!): Payment!
   createProductSubCategory(name: String!): ProductSubCategory!
   createProductMainCategory(name: String!): ProductMainCategory!
   createUser(createUserInput: CreateUserInput!): User!

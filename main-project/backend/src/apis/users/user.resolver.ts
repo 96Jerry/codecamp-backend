@@ -37,10 +37,10 @@ export class UserResolver {
   // 로그인 했을 때만 조회 가능하게 해주는 방법
   @UseGuards(GqlAuthAccessGuard)
   @Query(() => User)
-  fetchloginUser(
-    @CurrentUser() currentUser: any, //
+  async fetchloginUser(
+    @CurrentUser() currentUser: ICurrentUser, //
   ) {
-    return currentUser;
+    return await this.userService.findOnewithId({ userId: currentUser.id });
   }
   // 수정
   @Mutation(() => User)
