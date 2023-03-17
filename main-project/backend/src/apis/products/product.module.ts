@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Allergy } from '../allergies/entities/allergy.entity';
+import { Image } from '../images/entities/image.entity';
 import { ProductDetail } from '../productDetails/entities/productDetail.entity';
 import { ProductMainCategory } from '../productsMainCategory/entities/productMainCategory.entity';
 import { ProductSubCategory } from '../productSubCategory/entities/productSubCategory.entity';
@@ -16,6 +17,7 @@ import { ProductService } from './product.service';
       Allergy,
       ProductMainCategory,
       ProductSubCategory,
+      Image,
     ]), //
   ],
   providers: [ProductResolver, ProductService],

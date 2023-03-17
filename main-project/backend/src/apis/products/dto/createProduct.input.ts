@@ -18,4 +18,7 @@ export class CreateProductInput {
 
   @Field(() => [String])
   allergies: string[];
+
+  @Field(() => [String])
+  imageUrls: string[];
 }

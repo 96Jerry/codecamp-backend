@@ -8,6 +8,8 @@ import { ProductMainCategoryModule } from './apis/productsMainCategory/productMa
 import { UserModule } from './apis/users/user.module';
 import { AuthModule } from './apis/auth/auth.module';
 import { PaymentModule } from './apis/payment/payment.module';
+import { FileMoudle } from './apis/file/file.module';
+import { ImageModule } from './apis/images/image.module';
 
 @Module({
   imports: [
@@ -25,9 +27,11 @@ import { PaymentModule } from './apis/payment/payment.module';
       database: 'myproject04',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
-      logging: true,
+      // logging: true,
     }),
     ProductModule,
+    ImageModule,
+    FileMoudle,
     PaymentModule,
     ProductSubCategoryModule,
     ProductMainCategoryModule,

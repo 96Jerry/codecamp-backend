@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Allergy } from '../allergies/entities/allergy.entity';
+import { Image } from '../images/entities/image.entity';
 import { ProductDetail } from '../productDetails/entities/productDetail.entity';
 import { ProductMainCategory } from '../productsMainCategory/entities/productMainCategory.entity';
 import { ProductSubCategory } from '../productSubCategory/entities/productSubCategory.entity';
@@ -20,6 +21,8 @@ export class ProductService {
     private readonly productMainCategoryRepository: Repository<ProductMainCategory>,
     @InjectRepository(ProductSubCategory)
     private readonly productSubCategoryRepository: Repository<ProductSubCategory>,
+    @InjectRepository(Image)
+    private readonly imageRepository: Repository<Image>,
   ) {}
   async findAll() {
     return await this.productRepository.find({
@@ -39,6 +42,7 @@ export class ProductService {
       productSubCategoryId,
       productMainCategoryId,
       allergies,
+      imageUrls,
       ...product
     } = createProductInput;
     const result = await this.productDetailRepository.save({
@@ -72,18 +76,73 @@ export class ProductService {
       }
     }
 
-    return await this.productRepository.save({
+    const result3 = await this.productRepository.save({
       ...product, // 이 부분이 관계 id 설정 과정이다.
       productDetail: result, // id 만 넣어줘도 되지만 전체를 넣어줘야 create 함수와 함께 조회 할 때 전체 조회 가능
       productSubCategory: productSubCategory,
       allergies: result2,
     });
+
+    // 저장된 같은 image 가 없으면 image table에 저장
+    // 하나의 이미지에는 하나의 상품만 가능
+    // 하나의 상품에는 여러개의 이미지 가능
+    for (let i = 0; i < imageUrls.length; i++) {
+      const imageUrl = imageUrls[i];
+      // this.productRepository.findOne({where: {}})
+      const hasImage = await this.imageRepository.findOne({
+        where: { imageAddress: imageUrl },
+      });
+
+      // console.log(product);
+      // console.log(result3);
+      await this.imageRepository.save({
+        imageAddress: imageUrl,
+        product: result3.id,
+      });
+    }
+
+    return result3;
   }
 
+  // 수정하고 싶은 url 배열을 담아서 받아오면, image url 을 변경해줘야 한다.
+
+  // 1-1. 상품 id 에 해당하는 모든 image Url 목록 조회
+
+  // 1-2. image table 에서 상품 id 에 해당하는 모든 image url 삭제
+
+  // 1-3. 새로운 image url로 데이터 생성 (모두 삭제했다가 다시 저장하는 로직)
+
+  // or
+
+  // 2-1. 상품 id 에 해당하는 모든 image Url 목록 조회
+
+  // 2-2. image table 에서 상품 id 에 해당하는 모든 image url 조회
+
+  // 2-3. 기존에 없는 이미지면서 클라이언트가 보내준 이미지면 데이터 생성
+
+  // 2-4. 기존에 있지만 클라이언트가 보내주지 않았다면 삭제
   async update({ productId, updateProductInput }) {
+    const { imageUrls, ...rest } = updateProductInput;
+
+    const oldImageUrls = await this.imageRepository.find({
+      where: { product: { id: productId } },
+    });
+
+    for (let i = 0; i < oldImageUrls.length; i++) {
+      const oldImageUrlId = oldImageUrls[i].id; // 'asdfew-wef3-2fe'
+
+      await this.imageRepository.delete({ id: oldImageUrlId });
+    }
+    for (let i = 0; i < imageUrls.length; i++) {
+      const newImageUrl = imageUrls[i]; // 'http://2'
+      this.imageRepository.save({
+        imageAddress: newImageUrl,
+        product: productId,
+      });
+    }
     return await this.productRepository.save({
       id: productId,
-      ...updateProductInput,
+      ...rest,
     });
   }
 
