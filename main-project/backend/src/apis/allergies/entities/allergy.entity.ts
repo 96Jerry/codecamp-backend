@@ -1,3 +1,4 @@
+import { Service } from '@google-cloud/storage/build/src/nodejs-common';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Product } from 'src/apis/products/entities/product.entity';
 import {
