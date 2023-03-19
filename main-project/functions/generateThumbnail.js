@@ -42,7 +42,25 @@
 //         .pipe(roundedCornerResizer)
 //         .pipe(writableStream);
 
-// 버킷에 새로 저장된 이미지 파 
-createThumbnail = () => {
-  console.log("a");
+// 버킷에 새로 저장된 이미지 받기, 크기를 조절해 버킷에 새로 저장
+import { Storage } from "@google-cloud/storage";
+// const {Storage} = require('@google-cloud/storage')
+
+createThumbnail = async (images) => {
+  const storage = new Storage({
+    projectId: "sociallogin-380212",
+    keyFilename: "sociallogin-380212-0abab84de713.json",
+  }).bucket("gongcha-storage/thumb");
+
+  const results = await Promise.all(
+      waitedFiles.map((el) => {
+        return new Promise((resolve, reject) => {
+          el.createReadStream()
+            .pipe(storage.file(el.filename).createWriteStream())
+            .on('finish', () => resolve(`gongcha-storage/${el.filename}`))
+            .on('error', () => reject());
+        });
+      }),
+    );
+
 };
