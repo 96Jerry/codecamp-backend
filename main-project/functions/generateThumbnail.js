@@ -53,14 +53,14 @@ createThumbnail = async (images) => {
   }).bucket("gongcha-storage/thumb");
 
   const results = await Promise.all(
-      waitedFiles.map((el) => {
-        return new Promise((resolve, reject) => {
-          el.createReadStream()
-            .pipe(storage.file(el.filename).createWriteStream())
-            .on('finish', () => resolve(`gongcha-storage/${el.filename}`))
-            .on('error', () => reject());
-        });
-      }),
-    );
-
+    waitedFiles.map((el) => {
+      return new Promise((resolve, reject) => {
+        el.createReadStream()
+          .pipe(storage.file(el.filename).createWriteStream())
+          .on("finish", () => resolve(`gongcha-storage/${el.filename}`))
+          .on("error", () => reject());
+      });
+    })
+  );
 };
+//
