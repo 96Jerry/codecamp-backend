@@ -1,0 +1,30 @@
+show databases;
+use myproject03;
+SELECT * from board;
+show procedure status;
+create procedure mydummydata()
+begin
+	declare i int default 1;
+	while i <= 5000000 do
+	insert into board(writer, title, contents) values('철수', rand(), '내용');
+	set i = i + 1;
+end while;
+end;
+
+#프로시져 실행
+call mydummydata();
+
+explain
+select * from board where title = '0.3932454068150794';
+
+explain
+select * from board where number = 1;
+
+# 인덱스 확인
+show index from board;
+
+# 인덱스 생성
+create index idx_title on board(title);
+
+# 최종 성능 비교
+select * from board where title = '0.3932454068150794';
