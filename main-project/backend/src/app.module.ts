@@ -23,7 +23,7 @@ import { ImageModule } from './apis/images/image.module';
       host: '127.0.0.1',
       port: 3306,
       username: 'root',
-      password: 'dlawns170633!',
+      password: '0000',
       database: 'myproject04',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
