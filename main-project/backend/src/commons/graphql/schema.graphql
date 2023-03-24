@@ -77,7 +77,8 @@ type Mutation {
   updateUser(updateUserInput: UpdateUserInput!, userId: String!): User!
   updateUserPwd(changePwd: String!): Boolean!
   deleteLoginUser: Boolean!
-  login(email: String!, password: String!): String!
+  login(email: String!, password: String!): [String!]!
+  logout: String!
   restoreAccessToken: String!
 }
 

@@ -17,9 +17,8 @@ export class UserResolver {
   async createUser(
     @Args('createUserInput') createUserInput: CreateUserInput, //
   ) {
-    const hashedPassword = await bycrpt.hash(createUserInput.password, 10);
-    createUserInput.password = hashedPassword;
-    return this.userService.create({ createUserInput });
+    // console.log(createUserInput);
+    return this.userService.create({ ...createUserInput });
   }
 
   // 삭제
