@@ -19,7 +19,7 @@
     GET http://localhost:9200/myboard/_search
 
     # postmans CRUD연습(D) - 테이블제거
-    DELETE http://localhost:9200/myboard
+    DELETE http://localhost:9200/myboar
 
     # postmans CRUD연습(R) - 테이블조회
     GET http://localhost:9200/myboard/_search
