@@ -70,10 +70,12 @@ export class AuthResolver {
     // return this.authService.verifyToken({ context });
     // 검증해서 아니면 에러 발생
     this.authService.verifyToken({ refreshToken, accessToken });
-    await this.cacheManager.set(`refreshToken: ${refreshToken}`, refreshToken, {
+    await this.cacheManager.set('refreshToken', refreshToken, {
       ttl: 120,
     });
-    await this.cacheManager.set(`accessToken: ${accessToken}`, accessToken, {
+    // const aaa = await this.cacheManager.get('refreshToken');
+    // console.log(aaa);
+    await this.cacheManager.set('accessToken', accessToken, {
       ttl: 120,
     });
     return '로그아웃 성공';
