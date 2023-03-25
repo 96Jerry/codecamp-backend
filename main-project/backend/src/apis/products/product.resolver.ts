@@ -19,7 +19,7 @@ export class ProductResolver {
     @Inject(CACHE_MANAGER)
     private readonly cacheManager: Cache,
   ) {}
-  @Query(() => String)
+  @Query(() => [Product])
   async fetchProducts(
     @Args('search') search: string, //
   ) {
@@ -37,20 +37,23 @@ export class ProductResolver {
       return hasResult;
     }
     // 2. 없다면 elasticsearch에서 해당 검색어를 match query를 이용해 상품이름에서 검색후, 검색결과를 redis에 저장한다. 또한 결과를 클라이언트에 반환하기
-    // 하나만 있다고 가정하고 만들고 나중에 여러개가 있을 때로 수정해준다!!!
     else {
       const elasticResult: any = await this.elasticService.search({
         index: 'myproduct04',
         query: {
-          // match: { name: `${search}` },
-          match_all: {},
+          match: { name: `${search}` },
+          // match_all: {},
         },
       });
-      const elasticNameResult = elasticResult.hits.hits[0]._source.name;
+      const elasticNameResult = elasticResult.hits.hits.map((el: any) => ({
+        id: el._source.id,
+        name: el._source.name,
+      }));
+      // const elasticNameResult = elasticResult.hits.hits[0]._source.name;
       await this.cacheManager.set(`${search}`, elasticNameResult, { ttl: 120 });
 
-      const result = await this.cacheManager.get(`${search}`);
-      return result;
+      const results = await this.cacheManager.get(`${search}`);
+      return results;
 
       // 조회 연습을 위해 주석처리
       // return this.productService.findAll();
