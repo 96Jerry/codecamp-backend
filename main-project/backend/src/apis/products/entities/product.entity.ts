@@ -12,6 +12,7 @@ import {
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -42,4 +43,8 @@ export class Product {
   @ManyToMany(() => Allergy, (allergies) => allergies.products)
   @Field(() => [Allergy])
   allergies: Allergy[];
+
+  @UpdateDateColumn()
+  @Field(() => Date)
+  updatedAt: Date;
 }
