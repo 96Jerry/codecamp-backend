@@ -35,6 +35,7 @@ import { UserModule } from './apis/users/user.module';
       database: 'myserver03',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
+      logging: true,
     }),
   ],
 })
