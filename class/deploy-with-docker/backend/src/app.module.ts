@@ -10,6 +10,7 @@ import { PointTransactionModule } from './apis/pointTransaction/pointTransaction
 import { ProductCategoryModule } from './apis/productCategory/productCategory.module';
 import { ProductModule } from './apis/products/product.module';
 import { UserModule } from './apis/users/user.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -38,5 +39,6 @@ import { UserModule } from './apis/users/user.module';
       logging: true,
     }),
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
