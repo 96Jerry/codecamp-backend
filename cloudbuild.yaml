@@ -13,13 +13,13 @@ steps:
       - class/deploy-with-docker/backend/docker-compose.prod.yaml
       - push
 
-  # 3단계 => kubectl set image deployment/mybackend my-backend-sha256-1=asia.gcr.io/backend-357008/my-backend:1.8
+  # 3단계 => kubectl set image deployment/mybackend my-backend-sha256-1=asia.gcr.io/backend-357008/my-backend:1.9
   - name: gcr.io/cloud-builders/kubectl
     args:
       - set
       - image
       - deployment/mybackend
-      - my-backend03-sha256-1=asia.gcr.io/sociallogin-380212/my-backend03:1.8
+      - my-backend03-sha256-1=asia.gcr.io/sociallogin-380212/my-backend03:1.9
     env:
       - CLOUDSDK_COMPUTE_ZONE=asia-northeast3
       - CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1
