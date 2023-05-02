@@ -1,4 +1,4 @@
-//회원가입하기 api
+// 회원가입하기 api
 // index.js
 
 import {

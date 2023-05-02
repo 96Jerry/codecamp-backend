@@ -1,4 +1,4 @@
-function getWelcomeTemplate({ name }) {
+function getWelcomeTemplate({ name, age, createdAt }) {
   const result = `
     <html>
         <body>
@@ -6,7 +6,7 @@ function getWelcomeTemplate({ name }) {
             <hr />
             <div>이름: ${name}</div>
             <div>나이: ${age}살</div>
-            <div>학교: ${school}</div>
+            <div>학교: 학교</div>
             <div>가입일: ${createdAt}</div>
 
         </body>
